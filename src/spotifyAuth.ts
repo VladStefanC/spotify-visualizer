@@ -1,5 +1,5 @@
 const CLIENT_ID = "3ec1baa5d2e649d28f46d12f54b37cfc"
-const REDIRECT_URI = "https://spotify-visualizer-uikr.onrender.com/"
+const REDIRECT_URI = "https://spotify-visualizer-eight.vercel.app/"
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const RESPONSE_TYPE = "token";
 
