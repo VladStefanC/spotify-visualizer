@@ -13,7 +13,7 @@ export default function App() {
     if(!storedToken && hash) {
       const _token = hash.substring(1).split("&").find((param) => param.startsWith("access_token"))?.split("=")[1];
 
-      //window.location.hash="";
+      window.location.hash="";
 
       if(_token) {
         window.localStorage.setItem("token", _token);
