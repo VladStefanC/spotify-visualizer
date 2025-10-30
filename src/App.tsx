@@ -4,35 +4,35 @@ import SpotifyLogin from "./components/SpotifyLogin";
 
 
 export default function App() {
-  const [token, setToken] = useState<string | null>(null);
+  const [code, setcode] = useState<string | null>(null);
 
   useEffect(() => {
     const hash = window.location.hash;
-    const storedToken = window.localStorage.getItem("token");
+    const storedcode = window.localStorage.getItem("code");
 
-    if(!storedToken && hash) {
-      const _token = hash.substring(1).split("&").find((param) => param.startsWith("access_token"))?.split("=")[1];
+    if(!storedcode && hash) {
+      const _code = hash.substring(1).split("&").find((param) => param.startsWith("access_code"))?.split("=")[1];
 
-      window.location.hash="";
+      window.location.hash= "";
 
-      if(_token) {
-        window.localStorage.setItem("token", _token);
-        setToken(_token);
+      if(_code) {
+        window.localStorage.setItem("code", _code);
+        setcode(_code);
 
       }
-    } else if (storedToken) {
-      setToken(storedToken);
+    } else if (storedcode) {
+      setcode(storedcode);
     }
 
   }, []);
 
   const handleLogout = () => {
-    setToken(null);
-    window.localStorage.removeItem("token");
+    setcode(null);
+    window.localStorage.removeItem("code");
 
   };
 
-  if(!token){
+  if(!code){
     return <SpotifyLogin />;
 
   }
