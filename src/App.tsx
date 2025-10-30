@@ -1,74 +1,42 @@
 import { useEffect, useState } from "react";
 import SpotifyLogin from "./components/SpotifyLogin";
-import { getUserProfile } from "./spotifyApi";
-import { exchangeCodeForToken } from "./spotifyToken";
-
-
-interface SpotifyUser {
-  display_name : string;
-  country : string;
-  images : {url :string} [];
-
-}
 
 export default function App() {
-  //const [code, setcode] = useState<string | null>(null);
-  const [user, setUser] = useState<SpotifyUser | null>(null);
-  const [token, setToken] = useState<string | null>(null);
-
-  async function handleFetchProfile() {
-    if (!token) return;
-    const data = await getUserProfile(token);
-    setUser(data);
-  }
+  const [code, setCode] = useState<string | null>(null);
 
   useEffect(() => {
-    //const hash = window.location.hash;
     const params = new URLSearchParams(window.location.search);
-    const storedCode = window.localStorage.getItem("code");
+    const codeParam = params.get("code");
+    const stored = localStorage.getItem("code");
 
-    if (!storedCode) {
-      const codeParam = params.get("code");
-
-      if (codeParam){
-          exchangeCodeForToken(codeParam).then((token) => { 
-            if(token) {
-              localStorage.setItem("token", token);
-              setToken(token);
-              window.history.replaceState({}, document.title, "/");
-            }
-          });
-      }
-    } else {
-      setToken(storedCode);
+    if (stored) {
+      setCode(stored);
+    } else if (codeParam) {
+      localStorage.setItem("code", codeParam);
+      setCode(codeParam);
+      // Clean the URL so ?code=... disappears
+      window.history.replaceState({}, document.title, "/");
     }
   }, []);
 
   const handleLogout = () => {
-    setToken(null);
-    window.localStorage.removeItem("code");
+    localStorage.removeItem("code");
+    setCode(null);
   };
 
-  if (!token) {
+  if (!code) {
     return <SpotifyLogin />;
   }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-900 text-white">
-      <h1 className="text-3xl font-bold mb-4"> 🎧 Logged in to Spotify! </h1>
-      <button
-        onClick={handleFetchProfile}
-        className="bg-orange-500 px-6 py-2 rounded-md hover:bg-orange-600 transition"
-      >
-        Load Profile
-      </button>
-      {user && (
-        <div>
-          <h2>{user.display_name}</h2>
-          <h3>{user.country}</h3>
-          <img src={user.images?.[0]?.url} alt="Profile" width={100} />
-        </div>
-      )}
+      <h1 className="text-3xl font-bold mb-4">🎧 Logged in (authorization code detected)</h1>
+      <p className="max-w-xl text-sm text-gray-400 mb-6 text-center">
+        <span className="font-semibold">Auth code</span> (temporary, for token exchange only):
+      </p>
+      <pre className="max-w-xl break-all whitespace-pre-wrap bg-neutral-800 p-3 rounded-md mb-8 text-xs">
+        {code}
+      </pre>
       <button
         onClick={handleLogout}
         className="bg-red-500 px-6 py-2 rounded-md hover:bg-red-600 transition"
