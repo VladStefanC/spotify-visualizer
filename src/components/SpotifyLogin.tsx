@@ -2,7 +2,7 @@ import { loginUrl } from "../spotifyAuth";
 import { FaSpotify } from "react-icons/fa";
 
 export default function SpotifyLogin() {
-    console.log("Spotify login URL:", loginUrl)
+   
   return (
     <div className="flex items-center justify-center h-screen bg-neutral-900 text-white">
       <a
