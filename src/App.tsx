@@ -12,7 +12,7 @@ interface SpotifyUser {
 }
 
 export default function App() {
-  const [code, setcode] = useState<string | null>(null);
+  //const [code, setcode] = useState<string | null>(null);
   const [user, setUser] = useState<SpotifyUser | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
@@ -40,16 +40,16 @@ export default function App() {
           });
       }
     } else {
-      setcode(storedCode);
+      setToken(storedCode);
     }
   }, []);
 
   const handleLogout = () => {
-    setcode(null);
+    setToken(null);
     window.localStorage.removeItem("code");
   };
 
-  if (!code) {
+  if (!token) {
     return <SpotifyLogin />;
   }
 
