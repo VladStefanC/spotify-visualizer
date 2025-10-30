@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SpotifyLogin from "./components/SpotifyLogin";
 import { getUserProfile } from "./spotifyApi";
+import { exchangeCodeForToken } from "./spotifyToken";
 
 
 interface SpotifyUser {
@@ -29,11 +30,14 @@ export default function App() {
     if (!storedCode) {
       const codeParam = params.get("code");
 
-      if (codeParam) {
-        window.localStorage.setItem("code", codeParam);
-        setcode(codeParam);
-
-        window.history.replaceState({}, document.title, "/");
+      if (codeParam){
+          exchangeCodeForToken(codeParam).then((token) => { 
+            if(token) {
+              localStorage.setItem("token", token);
+              setToken(token);
+              window.history.replaceState({}, document.title, "/");
+            }
+          });
       }
     } else {
       setcode(storedCode);
