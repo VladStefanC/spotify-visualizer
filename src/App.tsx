@@ -7,21 +7,23 @@ export default function App() {
   const [code, setcode] = useState<string | null>(null);
 
   useEffect(() => {
-    const hash = window.location.hash;
-    const storedcode = window.localStorage.getItem("code");
+    //const hash = window.location.hash;
+    const params = new URLSearchParams(window.location.search)
+    const storedCode = window.localStorage.getItem("code");
 
-    if(!storedcode && hash) {
-      const _code = hash.substring(1).split("&").find((param) => param.startsWith("access_code"))?.split("=")[1];
+    if(!storedCode) {
 
-      window.location.hash= "";
+      const codeParam = params.get("code");
 
-      if(_code) {
-        window.localStorage.setItem("code", _code);
-        setcode(_code);
+      if(codeParam) {
+        window.localStorage.setItem("code", codeParam);
+        setcode(codeParam);
+
+        window.history.replaceState({}, document.title, "/");
 
       }
-    } else if (storedcode) {
-      setcode(storedcode);
+    } else {
+      setcode(storedCode);
     }
 
   }, []);
