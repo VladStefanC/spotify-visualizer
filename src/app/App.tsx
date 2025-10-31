@@ -97,7 +97,7 @@ export default function App() {
   };
 
   const productLabel = (() => {
-    const product = profile?.product?.toLowerCase();
+    const product = profile?.type?.toLowerCase();
     switch (product) {
       case "premium":
         return "Spotify Premium";
