@@ -131,8 +131,8 @@ export default function App() {
   }
 
   return (
-    <>
-      <div className="flex object-top-right min-h-screen bg-neutral-700 text-white gap-6">
+
+     <div className="flex object-top-right min-h-screen bg-neutral-700 text-white gap-6">
         {profile?.images?.[0]?.url && (
           <img
             src={profile.images[0].url}
@@ -140,24 +140,25 @@ export default function App() {
             className="w-32 h-32 rounded-full border-4 border-green-500 shadow-lg"
           />
         )}
+    </div>
+
+    <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-700 text-white gap-6">
+      
+      <div className="text-center">
+        <h1 className="text-3xl font-bold mb-2">
+          {profile?.display_name ?? "Unknown listener"}
+        </h1>
+        <p className="text-gray-300">{profile?.email}</p>
+        <p className="text-gray-500 mt-1 uppercase tracking-wide text-xs">
+          {productLabel}
+        </p>
       </div>
-      <div className="flex items-center justify-center min-h-screen bg-neutral-700 text-white gap-6">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold mb-2">
-            {profile?.display_name ?? "Unknown listener"}
-          </h1>
-          <p className="text-gray-300">{profile?.email}</p>
-          <p className="text-gray-500 mt-1 uppercase tracking-wide text-xs">
-            {productLabel}
-          </p>
-        </div>
-        <button
-          onClick={handleLogout}
-          className="bg-red-500 px-6 py-2 rounded-md hover:bg-red-600 transition"
-        >
-          Logout
-        </button>
-      </div>
-    </>
+      <button
+        onClick={handleLogout}
+        className="bg-red-500 px-6 py-2 rounded-md hover:bg-red-600 transition"
+      >
+        Logout
+      </button>
+    </div>
   );
 }
