@@ -131,12 +131,12 @@ export default function App() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-700 text-white gap-6">
+    <div className="flex object-top-left justify-center min-h-screen bg-neutral-700 text-white gap-6">
       {profile?.images?.[0]?.url && (
         <img
           src={profile.images[0].url}
           alt={profile.display_name}
-          className="w-84 h-84 rounded-full border-4 border-green-500 shadow-lg"
+          className="w-32 h-32 rounded-full border-4 border-green-500 shadow-lg"
         />
       )}
       <div className="text-center">
