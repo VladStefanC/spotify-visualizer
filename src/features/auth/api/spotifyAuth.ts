@@ -10,8 +10,8 @@ const SCOPES = [
 ];
 
 
-export function buildLoginUrl(codeChallenge : string) {
-  return `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect-uri=${encodeURIComponent(REDIRECT_URI)}
-  &response_type=${RESPONSE_TYPE}&scope=${SCOPES.join("%20")}&code_challenge=${codeChallenge}&code_challenge_method=s256%show_dialog=true`;
-  
+export function buildLoginUrl(codeChallenge: string) {
+  return `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(
+    REDIRECT_URI
+  )}&response_type=${RESPONSE_TYPE}&scope=${SCOPES.join("%20")}&code_challenge=${codeChallenge}&code_challenge_method=S256&show_dialog=true`;
 }
