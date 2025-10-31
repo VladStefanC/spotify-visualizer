@@ -5,10 +5,22 @@ import { getUserProfile } from "../features/profile/api";
 
 
 type SpotifyProfile = { 
-  display_name : string;
-  email : string;
-  product: string;
-  images? : {url: string}[];
+ 
+  country: string;
+    display_name: string;
+    email: string;
+    explicit_content: {
+        filter_enabled: boolean,
+        filter_locked: boolean
+    },
+    external_urls: { spotify: string; };
+    followers: { href: string; total: number; };
+    href: string;
+    id: string;
+    images? : {url: string}[];
+    product: string;
+    type: string;
+    uri: string;
 
 };
 
@@ -114,14 +126,14 @@ export default function App(){
         <img 
             src = {profile.images[0].url}
             alt={profile.display_name}
-            className="w-32 h-32 rounded-full border-4 border-green-500 shadow-lg"
+            className="w-84 h-84 rounded-full border-4 border-green-500 shadow-lg"
         />
       )}
       <div className="text-center">
         <h1 className="text-3xl font-bold mb-2">{profile?.display_name ?? "Unknown listener"}</h1>
         <p className="text-gray-300">{profile?.email}</p>
         <p className="text-gray-500 mt-1 uppercase tracking-wide text-xs">
-          {profile?.product === "premium" ? "Spotify Premium" : "Spotify Free"}
+          {profile?.type === "premium" ? "Spotify Premium" : "Spotify Free"}
         </p>
       </div>
       <button 
