@@ -1,4 +1,4 @@
-import { CLIENT_ID } from "./spotifyAuth";
+import { CLIENT_ID } from "../spotifyAuth";
 
 export async function exchangeCodeForToken(code:string) {
     const verifier = window.localStorage.getItem("spotify_code_verifier");
