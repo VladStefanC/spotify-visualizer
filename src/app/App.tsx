@@ -177,7 +177,6 @@ export default function App() {
     return <SpotifyLogin />;
   }
 
-
   if (!accessToken) {
     return <SpotifyLogin />;
   }
@@ -276,20 +275,22 @@ export default function App() {
           </div>
         </div>
       </div>
-      <img 
-        className="absoulte inset-0 m-auto rounded-full object-cover w-[calc(100bh/3)] max-w-[calc(100vw/3)] aspect-square animate-spin"
-        src={nowPlaying?.albumImage ?? ""}
-        alt="vynil" />
+      {nowPlaying?.albumImage && (
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div className="relative h-[22rem] w-[22rem] animate-vinyl-spin">
+            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,var(--wave-a),rgba(0,0,0,0.85))] blur-sm" />
+            <div className="absolute inset-[12%] rounded-full border-8 border-[color:var(--wave-b)] opacity-60" />
+            <div className="absolute inset-[36%] rounded-full bg-[radial-gradient(circle,var(--wave-c),rgba(0,0,0,0.7))] shadow-[0_0_40px_-10px_var(--wave-c)]" />
+            <div className="absolute inset-0 rounded-full bg-[repeating-radial-gradient(circle at center, transparent, transparent 8px, rgba(255,255,255,0.04) 10px)] mix-blend-overlay opacity-40" />
 
-      {/* Album art centered 
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <img
-          src={nowPlaying?.albumImage ?? ""}
-          alt={nowPlaying?.trackName ?? ""}
-          className="w-100 h-100 shadow-2xl object-cover"
-        />
-      </div>
-      */}
+            <img
+              src={nowPlaying.albumImage}
+              alt={nowPlaying.trackName ?? ""}
+              className="absolute inset-[18%] h-auto w-auto rounded-full object-cover shadow-2xl"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
