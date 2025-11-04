@@ -7,7 +7,6 @@ import {
   type CurrentPlayBack,
 } from "../features/auth/api/spotifyPlayer";
 
-
 type SpotifyProfile = {
   country: string;
   display_name: string;
@@ -176,29 +175,30 @@ export default function App() {
         </div>
       </div>
 
-     {/* Player visualizer */}
-      <div className="absolute bottom-8 left-1/2 w-full max-w-3xl -translate-x-1/2 rounded-xl border border-white/10 bg-neutral-900/70 px-8 py-2 shadow-2xl backdrop-blur
-">
-        <p className="text-xs uppercase tracking-wide text-gray-400">
-          {isPaused ? "Playback Paused" : "Now Playing"}
-        </p>
+      {/* Player visualizer */}
+      <div className="absolute bottom-10 left-1/2 w-[min(90vw,960px)] -translate-x-1/2">
+        <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/8 px-10 py-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+          <p className="text-xs uppercase tracking-wide text-gray-400">
+            {isPaused ? "Playback Paused" : "Now Playing"}
+          </p>
 
-        {nowPlaying ? (
-          <div className="mt-2 space-y-1">
-            <h2 className="text-lg font-semibold">{nowPlaying.trackName}</h2>
-            <p className="text-sm text-gray-300">{nowPlaying.artistsNames}</p>
-            <p className="text-sm text-gray-400">{nowPlaying.albumName}</p>
-          </div>
-        ) : (
-          <p className="mt-2 text-sm text-gray-300">No track is playing</p>
-        )}
+          {nowPlaying ? (
+            <div className="mt-2 space-y-1">
+              <h2 className="text-lg font-semibold">{nowPlaying.trackName}</h2>
+              <p className="text-sm text-gray-300">{nowPlaying.artistsNames}</p>
+              <p className="text-sm text-gray-400">{nowPlaying.albumName}</p>
+            </div>
+          ) : (
+            <p className="mt-2 text-sm text-gray-300">No track is playing</p>
+          )}
+        </div>
       </div>
-
-      <div className="absolute top-1/2 left-1/1.5  -translate-y-1/2">
-        <img 
-          src = {nowPlaying?.albumImage ?? ""}
-          alt = {nowPlaying?.trackName ?? ""}
-          className="w-100 h-100 shadow-2xl object-cover"/>
+      <div className="absolute top-1/2 left-1/1.80  -translate-y-1/2">
+        <img
+          src={nowPlaying?.albumImage ?? ""}
+          alt={nowPlaying?.trackName ?? ""}
+          className="w-100 h-100 shadow-2xl object-cover"
+        />
       </div>
       {/* add the rest of your visualizer layout here */}
     </div>
