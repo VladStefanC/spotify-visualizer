@@ -177,7 +177,7 @@ export default function App() {
       {/* Player visualizer */}
       <div className="absolute bottom-10 left-1/2 w-[min(90vw,960px)] -translate-x-1/2">
         {/* relative -> anchors absolutely positioned highlights; overflow-hidden -> keeps the glow inside rounded edges; rounded-3xl/border/bg/... -> glass look; px-10/py-8 -> inner padding */}
-        <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/10 px-10 py-2 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+        <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/10 px-6 py-1 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.45)] backdrop-blur-xl">
           {/* pointer-events-none so glow never blocks clicks; absolute inset-0 stretches the layer; opacity-60 softens intensity */}
           <div className="pointer-events-none absolute inset-0 opacity-60">
             {/* left emerald blob adds warm highlight */}
@@ -219,7 +219,7 @@ export default function App() {
           </div>
         </div>
       </div>
-      <div className="absolute top-1/2 left-[45%] -translate-x-1/2 -translate-y-1/2">
+      <div className="absolute top-1/2 left-[35%] -translate-x-1/2 -translate-y-1/2">
         <img
           src={nowPlaying?.albumImage ?? ""}
           alt={nowPlaying?.trackName ?? ""}
