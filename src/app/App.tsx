@@ -3,8 +3,7 @@ import SpotifyLogin from "../features/auth/SpotifyLogin";
 import { exchangeCodeForToken } from "../features/auth/api";
 import { getUserProfile } from "../features/profile/api";
 import {
-  getCurrentlyPlaying,
-  type CurrentPlayBack,
+  getCurrentlyPlaying, type CurrentPlayback,
 } from "../features/auth/api/spotifyPlayer";
 
 type SpotifyProfile = {
@@ -31,7 +30,7 @@ export default function App() {
   const [profile, setProfile] = useState<SpotifyProfile | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [nowPlaying, setNowPlaying] = useState<CurrentPlayBack | null>(null);
+  const [nowPlaying, setNowPlaying] = useState<CurrentPlayback | null>(null);
   const isPaused = nowPlaying ? !nowPlaying.isPlaying : true;
 
   useEffect(() => {
@@ -177,23 +176,50 @@ export default function App() {
 
       {/* Player visualizer */}
       <div className="absolute bottom-10 left-1/2 w-[min(90vw,960px)] -translate-x-1/2">
-        <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/8 px-10 py-4 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.45)] backdrop-blur-xl">
-          <p className="text-xs uppercase tracking-wide text-gray-400">
-            {isPaused ? "Playback Paused" : "Now Playing"}
-          </p>
+        {/* relative -> anchors absolutely positioned highlights; overflow-hidden -> keeps the glow inside rounded edges; rounded-3xl/border/bg/... -> glass look; px-10/py-8 -> inner padding */}
+        <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/10 px-10 py-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+          {/* pointer-events-none so glow never blocks clicks; absolute inset-0 stretches the layer; opacity-60 softens intensity */}
+          <div className="pointer-events-none absolute inset-0 opacity-60">
+            {/* left emerald blob adds warm highlight */}
+            <div className="absolute -left-24 top-0 h-44 w-44 rounded-full bg-emerald-400/40 blur-3xl" />
+            {/* right purple blob balances the palette */}
+            <div className="absolute right-0 top-12 h-36 w-36 rounded-full bg-purple-500/30 blur-2xl" />
+            {/* bottom ellipse imitates refracted light */}
+            <div className="absolute -bottom-40 left-1/2 h-80 w-[120%] -translate-x-1/2 rounded-[50%] bg-white/10 blur-3xl" />
+          </div>
 
-          {nowPlaying ? (
-            <div className="mt-2 space-y-1">
-              <h2 className="text-lg font-semibold">{nowPlaying.trackName}</h2>
-              <p className="text-sm text-gray-300">{nowPlaying.artistsNames}</p>
-              <p className="text-sm text-gray-400">{nowPlaying.albumName}</p>
-            </div>
-          ) : (
-            <p className="mt-2 text-sm text-gray-300">No track is playing</p>
-          )}
+          {/* z-10 keeps text above highlights; spacing handled below */}
+          <div className="relative z-10">
+            {/* label text for playback state */}
+            <p className="text-xs uppercase tracking-wide text-gray-300">
+              {isPaused ? "Playback Paused" : "Now Playing"}
+            </p>
+
+            {nowPlaying ? (
+              <>
+                {/* song title */}
+                <h2 className="mt-4 text-2xl font-semibold">
+                  {nowPlaying.trackName}
+                </h2>
+                {/* artist list */}
+                <p className="mt-1 text-sm text-gray-200">
+                  {nowPlaying.artistNames}
+                </p>
+                {/* album name */}
+                <p className="mt-1 text-sm text-gray-400">
+                  {nowPlaying.albumName}
+                </p>
+              </>
+            ) : (
+              /* fallback when nothing plays */
+              <p className="mt-4 text-sm text-gray-300">
+                No track is playing
+              </p>
+            )}
+          </div>
         </div>
       </div>
-      <div className="absolute top-1/2 left-1/1.80  -translate-y-1/2">
+      <div className="absolute top-1/2 left-1/2.2  -translate-y-1/2">
         <img
           src={nowPlaying?.albumImage ?? ""}
           alt={nowPlaying?.trackName ?? ""}
