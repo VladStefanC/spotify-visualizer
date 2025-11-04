@@ -175,8 +175,8 @@ export default function App() {
         </div>
       </div>
 
-      // Spotify Now Playing Section
-      <div className="absolute items-center bg-neutral-800/80 rounded-xl shadow-lg backdrop-blur transition">
+     {/* Player visualizer */}
+      <div className="absolute bottom-8 left-1/2 w-full max-w-3xl -translate-x-1/2  bg-neutral-800/80 rounded-2xl border border-white/10 shadow-lg backdrop-blur transition">
         <p className="text-xs uppercase tracking-wide text-gray-400">
           {isPaused ? "Playback Paused" : "Now Playing"}
         </p>
