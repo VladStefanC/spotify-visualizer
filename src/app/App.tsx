@@ -110,7 +110,7 @@ export default function App() {
     };
 
     fetchPlayback();
-    const timer = window.setInterval(fetchPlayback, 5000); // Refresh every 5 seconds
+    const timer = window.setInterval(fetchPlayback, 1500); // Refresh every 1.5 seconds
 
     return () => {
       isMounted = false;
@@ -146,12 +146,12 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-neutral-900 text-white">
-      <div className="absolute top-8 right-8 flex items-center gap-6 bg-neutral-800/70 px-6 py-4 rounded-xl shadow-lg backdrop-blur">
+      <div className="absolute top-8 right-8 flex items-center gap-6 bg-neutral-800/70 px-10 py-1 rounded-xl shadow-lg backdrop-blur">
         {profile?.images?.[0]?.url && (
           <img
             src={profile.images[0].url}
             alt={profile.display_name}
-            className="w-20 h-20 rounded-full border-2 border-green-500 object-cover"
+            className="w-20 h-20 border border-green-950 object-cover"
           />
         )}
 
@@ -159,15 +159,9 @@ export default function App() {
           <h1 className="text-xl font-semibold">
             {profile?.display_name ?? "Unknown listener"}
           </h1>
-          <p className="text-sm text-gray-300">{profile?.email}</p>
-          <p className="text-xs uppercase tracking-wide text-gray-400">
-            {profile?.product?.toLowerCase() === "premium"
-              ? "Spotify Premium"
-              : "Spotify"}
-          </p>
           <button
             onClick={handleLogout}
-            className="mt-3 bg-red-500 px-4 py-1.5 rounded-md text-sm hover:bg-red-600 transition"
+            className="mt-3 bg-red-500 px-4 py-1 rounded-md text-sm hover:bg-red-600 transition"
           >
             Logout
           </button>
@@ -219,7 +213,7 @@ export default function App() {
           </div>
         </div>
       </div>
-      <div className="absolute top-1/2 left-[35%] -translate-x-1/2 -translate-y-1/2">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <img
           src={nowPlaying?.albumImage ?? ""}
           alt={nowPlaying?.trackName ?? ""}
