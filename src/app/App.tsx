@@ -177,7 +177,7 @@ export default function App() {
       </div>
 
      {/* Player visualizer */}
-      <div className="absolute bottom-8 left-1/2 w-full max-w-3xl -translate-x-1/2 rounded-2xl border border-white/10 bg-neutral-900/70 px-8 py-6 shadow-2xl backdrop-blur
+      <div className="absolute bottom-8 left-1/2 w-full max-w-3xl -translate-x-1/2 rounded-xl border border-white/10 bg-neutral-900/70 px-8 py-2 shadow-2xl backdrop-blur
 ">
         <p className="text-xs uppercase tracking-wide text-gray-400">
           {isPaused ? "Playback Paused" : "Now Playing"}
@@ -198,7 +198,7 @@ export default function App() {
         <img 
           src = {nowPlaying?.albumImage ?? ""}
           alt = {nowPlaying?.trackName ?? ""}
-          className="w-64 h-64 shadow-2xl object-cover"/>
+          className="w-100 h-100 shadow-2xl object-cover"/>
       </div>
       {/* add the rest of your visualizer layout here */}
     </div>
