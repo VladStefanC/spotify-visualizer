@@ -291,11 +291,11 @@ export default function App() {
           </div>
         </div>
       )}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-[6px] border-white/20 bg-black/70 shadow-[0_0_35px_rgba(0,0,0,0.6)]">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
         <img
           src={nowPlaying?.albumImage ?? ""}
           alt={nowPlaying?.trackName ?? ""}
-          className="h-full w-full rounded-full object-cover shadow-[0_0_25px_rgba(0,0,0,0.45)]"
+          className="h-full w-full  object-cover shadow-[0_0_25px_rgba(0,0,0,0.45)]"
         />
       </div>
     </div>
