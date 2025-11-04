@@ -5,10 +5,10 @@
     transform: rotate(0deg) scale(0.95);
   }
   50% {
-    transform: rotate(15deg) scale(1.05);
+    transform: rotate(260deg) scale(1.05);
   }
   to {
-    transform: rotate(360deg) scale(0.95);
+    transform: rotate(530deg) scale(0.95);
   }
 }
 
@@ -16,5 +16,5 @@
 
 
 .animate-wave-medium {
-  animation: wave-medium 22s linear infinite;
+  animation: wave-medium 22s radial infinite;
 }
