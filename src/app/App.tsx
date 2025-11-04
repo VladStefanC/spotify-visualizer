@@ -176,7 +176,8 @@ export default function App() {
       </div>
 
      {/* Player visualizer */}
-      <div className="absolute bottom-8 left-1/2 w-full max-w-3xl -translate-x-1/2  bg-neutral-800/80 rounded-2xl border border-white/10 shadow-lg backdrop-blur transition">
+      <div className="absolute bottom-8 left-1/2 w-full max-w-3xl -translate-x-1/2 rounded-2xl border border-white/10 bg-neutral-900/70 px-8 py-6 shadow-2xl backdrop-blur
+">
         <p className="text-xs uppercase tracking-wide text-gray-400">
           {isPaused ? "Playback Paused" : "Now Playing"}
         </p>
