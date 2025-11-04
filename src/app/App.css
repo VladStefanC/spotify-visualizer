@@ -41,11 +41,3 @@
   color: #888;
 }
 
-@keyframes vinyl-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-.animate-vinyl-spin {
-  animation: vinyl-spin 22s linear infinite;
-}
-
