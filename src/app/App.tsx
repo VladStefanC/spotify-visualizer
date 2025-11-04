@@ -276,6 +276,12 @@ export default function App() {
           </div>
         </div>
       </div>
+      <img 
+        className="absoulte inset-0 m-auto rounded-full object-cover w-[calc(100bh/3)] max-w-[calc(100vw/3)] aspect-square animate-spin"
+        src={nowPlaying?.albumImage ?? ""}
+        alt="vynil" />
+
+      {/* Album art centered 
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <img
           src={nowPlaying?.albumImage ?? ""}
@@ -283,7 +289,7 @@ export default function App() {
           className="w-100 h-100 shadow-2xl object-cover"
         />
       </div>
-      {/* add the rest of your visualizer layout here */}
+      */}
     </div>
   );
 }
