@@ -276,28 +276,18 @@ export default function App() {
         </div>
       </div>
       {nowPlaying?.albumImage && (
-        <div className="absolute top-1/2 left-[65%] -translate-x-1/2 -translate-y-1/2">
-          <div className="relative h-[24rem] w-[24rem]">
-            {/* vinyl disc colored by palette */}
-            <div className="absolute inset-0 rounded-full blur-lg bg-[radial-gradient(circle,var(--wave-a),rgba(0,0,0,0.85))]" />
-            <div className="absolute inset-0 rounded-full animate-vinyl-spin">
-              <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.7) 55%,transparent 75%)]" />
-              <div className="absolute inset-[8%] rounded-full border-[6px] border-[color:var(--wave-b)] opacity-60" />
-              <div className="absolute inset-[16%] rounded-full border-[4px] border-[color:var(--wave-c)] opacity-45" />
-              <div className="absolute inset-0 rounded-full bg-[repeating-radial-gradient(circle at center,rgba(255,255,255,0.08),rgba(255,255,255,0.08) 3px,transparent 3px,transparent 6px)] mix-blend-overlay opacity-35" />
-            </div>
-
-            {/* album art label */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div className="relative h-[22rem] w-[22rem]">
+            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,var(--wave-a),rgba(0,0,0,0.9))] animate-vinyl-spin" />
+            <div className="absolute top-1/2 left-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white" />
+            <img
+              src={nowPlaying.albumImage}
+              alt={nowPlaying.trackName ?? ""}
+              className="absolute inset-[18%] h-auto w-auto rounded-full object-cover shadow-[0_0_20px_rgba(0,0,0,0.35)]"
+            />
           </div>
         </div>
       )}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-        <img
-          src={nowPlaying?.albumImage ?? ""}
-          alt={nowPlaying?.trackName ?? ""}
-          className="h-full w-full  object-cover shadow-[0_0_25px_rgba(0,0,0,0.45)]"
-        />
-      </div>
     </div>
   );
 }
