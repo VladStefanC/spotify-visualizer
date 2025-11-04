@@ -7,6 +7,7 @@ import {
   type CurrentPlayBack,
 } from "../features/auth/api/spotifyPlayer";
 
+
 type SpotifyProfile = {
   country: string;
   display_name: string;
@@ -187,17 +188,17 @@ export default function App() {
             <h2 className="text-lg font-semibold">{nowPlaying.trackName}</h2>
             <p className="text-sm text-gray-300">{nowPlaying.artistsNames}</p>
             <p className="text-sm text-gray-400">{nowPlaying.albumName}</p>
-            {nowPlaying?.albumImage && (
-              <img
-                src={nowPlaying.albumImage}
-                alt={nowPlaying.trackName ?? ""}
-                className="w-16 h-16 rounded object-cover mt-4"
-              />
-            )}
           </div>
         ) : (
           <p className="mt-2 text-sm text-gray-300">No track is playing</p>
         )}
+      </div>
+
+      <div className="absolute top-1/2 bottom-1/2 -translate-x-1/2 -translate-y-1/2">
+        <img 
+          src = {nowPlaying?.albumImage ?? ""}
+          alt = {nowPlaying?.trackName ?? ""}
+          className="w-64 h-64 shadow-2xl object-cover"/>
       </div>
       {/* add the rest of your visualizer layout here */}
     </div>
