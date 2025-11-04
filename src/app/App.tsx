@@ -202,22 +202,26 @@ export default function App() {
       style={paletteVars as CSSProperties}
     >
       {pallete ? <AnimatedBackground /> : null}
-      <div className="absolute top-8 right-8 flex items-center gap-6 bg-neutral-800/70 px-10 py-1 rounded-xl shadow-lg backdrop-blur">
+      <div className="group absolute top-8 right-8 flex items-center gap-4">
         {profile?.images?.[0]?.url && (
           <img
             src={profile.images[0].url}
             alt={profile.display_name}
-            className="w-14 h-14 border border-green-950 object-cover"
+            className="h-14 w-14 rounded-full border border-green-500 object-cover transition duration-300 group-hover:ring-2 group-hover:ring-green-400"
           />
         )}
 
-        <div className="text-right space-y-1">
-          <h1 className="text-xl font-semibold">
+        <div
+          className="flex flex-col items-end gap-1 rounded-xl border border-white/10 bg-neutral-800/80 px-6 py-4 shadow-lg backdrop-blur
+          opacity-0 translate-y-3 pointer-events-none transition-all duration-500 ease-out
+          group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto"
+        >
+          <h1 className="text-lg font-semibold">
             {profile?.display_name ?? "Unknown listener"}
           </h1>
           <button
             onClick={handleLogout}
-            className="mt-3 bg-red-500 px-4 py-1 rounded-md text-sm hover:bg-red-600 transition"
+            className="mt-2 bg-red-500 px-4 py-1 rounded-md text-sm hover:bg-red-600 transition"
           >
             Logout
           </button>
