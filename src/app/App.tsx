@@ -288,16 +288,16 @@ export default function App() {
             </div>
 
             {/* album art label */}
-            <div className="absolute top-1/2 left-1/2 h-[11rem] w-[11rem] -translate-x-1/2 -translate-y-1/2 rounded-full border-[6px] border-white/20 bg-black/70 shadow-[0_0_35px_rgba(0,0,0,0.6)]">
-              <img
-                src={nowPlaying.albumImage}
-                alt={nowPlaying.trackName ?? ""}
-                className="h-full w-full rounded-full object-cover shadow-[0_0_25px_rgba(0,0,0,0.45)]"
-              />
-            </div>
           </div>
         </div>
       )}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-[6px] border-white/20 bg-black/70 shadow-[0_0_35px_rgba(0,0,0,0.6)]">
+        <img
+          src={nowPlaying?.albumImage ?? ""}
+          alt={nowPlaying?.trackName ?? ""}
+          className="h-full w-full rounded-full object-cover shadow-[0_0_25px_rgba(0,0,0,0.45)]"
+        />
+      </div>
     </div>
   );
 }
