@@ -3,7 +3,8 @@ import SpotifyLogin from "../features/auth/SpotifyLogin";
 import { exchangeCodeForToken } from "../features/auth/api";
 import { getUserProfile } from "../features/profile/api";
 import {
-  getCurrentlyPlaying, type CurrentPlayback,
+  getCurrentlyPlaying,
+  type CurrentPlayback,
 } from "../features/auth/api/spotifyPlayer";
 
 type SpotifyProfile = {
@@ -151,7 +152,7 @@ export default function App() {
           <img
             src={profile.images[0].url}
             alt={profile.display_name}
-            className="w-20 h-20 border border-green-950 object-cover"
+            className="w-14 h-14 border border-green-950 object-cover"
           />
         )}
 
@@ -169,9 +170,14 @@ export default function App() {
       </div>
 
       {/* Player visualizer */}
-      <div className="absolute bottom-10 left-1/2 w-[min(90vw,960px)] -translate-x-1/2">
+      <div className="group absolute bottom-10 left-1/2 w-[min(90vw,960px)] -translate-x-1/2">
+
+        <div className="mx-auto mb-6 h-1.5 w-24 rounded-full bg-white/20 transition-all group-hover:bg-white" />
+
         {/* relative -> anchors absolutely positioned highlights; overflow-hidden -> keeps the glow inside rounded edges; rounded-3xl/border/bg/... -> glass look; px-10/py-8 -> inner padding */}
-        <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/10 px-6 py-1 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+        <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/10 px-6 py-1 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.45)] backdrop-blur-xl
+        opacity-0 scale translate-y-6 pointer-events-none transition-all duration-1000 ease-out group-hover:opacity-100 group-hover:translate-y-0 scale-100 group-hover:pointer-events-auto">
+
           {/* pointer-events-none so glow never blocks clicks; absolute inset-0 stretches the layer; opacity-60 softens intensity */}
           <div className="pointer-events-none absolute inset-0 opacity-60">
             {/* left emerald blob adds warm highlight */}
@@ -206,9 +212,7 @@ export default function App() {
               </>
             ) : (
               /* fallback when nothing plays */
-              <p className="mt-4 text-sm text-gray-300">
-                No track is playing
-              </p>
+              <p className="mt-4 text-sm text-gray-300">No track is playing</p>
             )}
           </div>
         </div>
