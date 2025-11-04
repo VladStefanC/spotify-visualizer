@@ -177,7 +177,7 @@ export default function App() {
 
       {/* Player visualizer */}
       <div className="absolute bottom-10 left-1/2 w-[min(90vw,960px)] -translate-x-1/2">
-        <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/8 px-10 py-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+        <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/8 px-10 py-4 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.45)] backdrop-blur-xl">
           <p className="text-xs uppercase tracking-wide text-gray-400">
             {isPaused ? "Playback Paused" : "Now Playing"}
           </p>
