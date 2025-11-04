@@ -40,3 +40,52 @@
 .read-the-docs {
   color: #888;
 }
+
+
+@keyframes wave-slow {
+  from {
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateX(-48%) rotate(5deg) scale(1.05);
+  }
+  to {
+    transform: translateX(-50%) rotate(360deg) scale(1);
+  }
+}
+
+@keyframes wave-medium {
+  from {
+    transform: rotate(0deg) scale(0.95);
+  }
+  50% {
+    transform: rotate(15deg) scale(1.05);
+  }
+  to {
+    transform: rotate(360deg) scale(0.95);
+  }
+}
+
+@keyframes wave-fast {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(20deg) scale(1.1);
+  }
+  to {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.animate-wave-slow {
+  animation: wave-slow 28s linear infinite;
+}
+
+.animate-wave-medium {
+  animation: wave-medium 22s linear infinite;
+}
+
+.animate-wave-fast {
+  animation: wave-fast 18s linear infinite;
+}

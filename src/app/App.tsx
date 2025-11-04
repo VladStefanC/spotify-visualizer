@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, type CSSProperties } from "react";
 import SpotifyLogin from "../features/auth/SpotifyLogin";
 import { exchangeCodeForToken } from "../features/auth/api";
 import { getUserProfile } from "../features/profile/api";
@@ -6,6 +6,8 @@ import {
   getCurrentlyPlaying,
   type CurrentPlayback,
 } from "../features/auth/api/spotifyPlayer";
+import { extractPallete } from "../features/auth/utils/pallete";
+import AnimatedBackground from "../features/player/components/AnimatedBackground";
 
 type SpotifyProfile = {
   country: string;
@@ -33,6 +35,40 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [nowPlaying, setNowPlaying] = useState<CurrentPlayback | null>(null);
   const isPaused = nowPlaying ? !nowPlaying.isPlaying : true;
+
+  const [pallete, setPallete] = useState<string[] | null>(null);
+  const palleteCache = useRef(new Map<string, string[]>());
+
+  useEffect(() => {
+    if (!nowPlaying?.trackId || !nowPlaying.albumImage) {
+      setPallete(null);
+      return;
+    }
+
+    const cacheKey = nowPlaying.trackId;
+    const cached = palleteCache.current.get(cacheKey);
+    if (cached) {
+      setPallete(cached);
+      return;
+    }
+
+    let isCancelled = false;
+
+    extractPallete(nowPlaying.albumImage)
+      .then((colors) => {
+        if (isCancelled) return;
+        setPallete(colors);
+        palleteCache.current.set(cacheKey, colors);
+      })
+      .catch((err) => {
+        console.error("Failed to extract palette", err);
+        if (!isCancelled) setPallete(null);
+      });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [nowPlaying?.trackId, nowPlaying?.albumImage]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -127,6 +163,21 @@ export default function App() {
     setAuthCode(null);
   };
 
+  const baseBackground =
+    "bg-gradient-to-br from-black via-zinc-950 to-neutral-900";
+  const paletteVars = pallete
+    ? {
+        "--wave-a": pallete[0],
+        "--wave-b": pallete[1] ?? pallete[0],
+        "--wave-c": pallete[2] ?? pallete[1] ?? pallete[0],
+      }
+    : undefined;
+
+  if (!accessToken) {
+    return <SpotifyLogin />;
+  }
+
+
   if (!accessToken) {
     return <SpotifyLogin />;
   }
@@ -146,7 +197,11 @@ export default function App() {
   }
 
   return (
-    <div className="relative min-h-screen bg-neutral-900 text-white">
+    <div
+      className={`relative min-h-screen text-white ${baseBackground}`}
+      style={paletteVars as CSSProperties}
+    >
+      {pallete ? <AnimatedBackground /> : null}
       <div className="absolute top-8 right-8 flex items-center gap-6 bg-neutral-800/70 px-10 py-1 rounded-xl shadow-lg backdrop-blur">
         {profile?.images?.[0]?.url && (
           <img
@@ -171,13 +226,13 @@ export default function App() {
 
       {/* Player visualizer */}
       <div className="group absolute bottom-10 left-1/2 w-[min(90vw,960px)] -translate-x-1/2">
-
-        <div className="mx-auto mb-6 h-1.5 w-24 rounded-full bg-white/20 transition-all group-hover:bg-white" />
+        <div className="mx-auto mb-6 h-1.5 w-24 rounded-full bg-white/5 transition-all group-hover:bg-white" />
 
         {/* relative -> anchors absolutely positioned highlights; overflow-hidden -> keeps the glow inside rounded edges; rounded-3xl/border/bg/... -> glass look; px-10/py-8 -> inner padding */}
-        <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/10 px-6 py-1 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.45)] backdrop-blur-xl
-        opacity-0 scale translate-y-6 pointer-events-none transition-all duration-1000 ease-out group-hover:opacity-100 group-hover:translate-y-0 scale-100 group-hover:pointer-events-auto">
-
+        <div
+          className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/10 px-6 py-1 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.45)] backdrop-blur-xl
+        opacity-0 scale translate-y-6 pointer-events-none transition-all duration-1000 ease-out group-hover:opacity-100 group-hover:translate-y-0 scale-100 group-hover:pointer-events-auto"
+        >
           {/* pointer-events-none so glow never blocks clicks; absolute inset-0 stretches the layer; opacity-60 softens intensity */}
           <div className="pointer-events-none absolute inset-0 opacity-60">
             {/* left emerald blob adds warm highlight */}
