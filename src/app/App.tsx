@@ -278,7 +278,7 @@ export default function App() {
       {nowPlaying?.albumImage && (
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <div className="relative h-[22rem] w-[22rem]">
-            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,var(--wave-a),rgba(0,0,0,0.9))] animate-vinyl-spin" />
+            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,var(--wave-a),rgba(0,0,0,0.9))] shadow-2xl animate-vinyl-spin"  />
             <div className="absolute top-1/2 left-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white" />
             <img
               src={nowPlaying.albumImage}
