@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import SpotifyLogin from "../features/auth/SpotifyLogin";
 import { exchangeCodeForToken } from "../features/auth/api";
 import { getUserProfile } from "../features/profile/api";
+import {
+  getCurrentlyPlaying,
+  type CurrentPlayBack,
+} from "../features/auth/api/spotifyPlayer";
 
 type SpotifyProfile = {
   country: string;
@@ -27,6 +31,8 @@ export default function App() {
   const [profile, setProfile] = useState<SpotifyProfile | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [nowPlaying, setNowPlaying] = useState<CurrentPlayBack | null>(null);
+  const isPaused = nowPlaying ? !nowPlaying.isPlaying : true;
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -88,6 +94,31 @@ export default function App() {
     fetchProfile();
   }, [accessToken]);
 
+  useEffect(() => {
+    if (!accessToken) return;
+
+    let isMounted = true;
+
+    const fetchPlayback = async () => {
+      try {
+        const playback = await getCurrentlyPlaying(accessToken);
+        if (isMounted) {
+          setNowPlaying(playback);
+        }
+      } catch (err) {
+        console.error("Failed to fetch playback", err);
+      }
+    };
+
+    fetchPlayback();
+    const timer = window.setInterval(fetchPlayback, 5000); // Refresh every 5 seconds
+
+    return () => {
+      isMounted = false;
+      window.clearInterval(timer);
+    };
+  }, [accessToken]);
+
   const handleLogout = () => {
     window.localStorage.removeItem("spotify_access_token");
     window.localStorage.removeItem("spotify_code_verifier");
@@ -95,7 +126,6 @@ export default function App() {
     setProfile(null);
     setAuthCode(null);
   };
-
 
   if (!accessToken) {
     return <SpotifyLogin />;
@@ -115,34 +145,58 @@ export default function App() {
     );
   }
 
-return (
-  <div className="relative min-h-screen bg-neutral-900 text-white">
-    <div className="absolute top-8 right-8 flex items-center gap-6 bg-neutral-800/70 px-6 py-4 rounded-xl shadow-lg backdrop-blur">
-      {profile?.images?.[0]?.url && (
-        <img
-          src={profile.images[0].url}
-          alt={profile.display_name}
-          className="w-20 h-20 rounded-full border-2 border-green-500 object-cover"
-        />
-      )}
+  return (
+    <div className="relative min-h-screen bg-neutral-900 text-white">
+      <div className="absolute top-8 right-8 flex items-center gap-6 bg-neutral-800/70 px-6 py-4 rounded-xl shadow-lg backdrop-blur">
+        {profile?.images?.[0]?.url && (
+          <img
+            src={profile.images[0].url}
+            alt={profile.display_name}
+            className="w-20 h-20 rounded-full border-2 border-green-500 object-cover"
+          />
+        )}
 
-      <div className="text-right space-y-1">
-        <h1 className="text-xl font-semibold">{profile?.display_name ?? "Unknown listener"}</h1>
-        <p className="text-sm text-gray-300">{profile?.email}</p>
-        <p className="text-xs uppercase tracking-wide text-gray-400">
-          {profile?.product?.toLowerCase() === "premium" ? "Spotify Premium" : "Spotify"}
-        </p>
-        <button
-          onClick={handleLogout}
-          className="mt-3 bg-red-500 px-4 py-1.5 rounded-md text-sm hover:bg-red-600 transition"
-        >
-          Logout
-        </button>
+        <div className="text-right space-y-1">
+          <h1 className="text-xl font-semibold">
+            {profile?.display_name ?? "Unknown listener"}
+          </h1>
+          <p className="text-sm text-gray-300">{profile?.email}</p>
+          <p className="text-xs uppercase tracking-wide text-gray-400">
+            {profile?.product?.toLowerCase() === "premium"
+              ? "Spotify Premium"
+              : "Spotify"}
+          </p>
+          <button
+            onClick={handleLogout}
+            className="mt-3 bg-red-500 px-4 py-1.5 rounded-md text-sm hover:bg-red-600 transition"
+          >
+            Logout
+          </button>
+        </div>
       </div>
+      <div className="absolute bottom-8 left-8 bg-neutral-800/80 px-6 py-4 rounded-xl shadow-lg backdrop-blur">
+        <p className="text-xs uppercase tracking-wide text-gray-400">
+          {isPaused ? "Playback Paused" : "Now Playing"}
+        </p>
+
+        {nowPlaying ? (
+          <div className="mt-2 space-y-1">
+            <h2 className="text-lg font-semibold">{nowPlaying.trackName}</h2>
+            <p className="text-sm text-gray-300">{nowPlaying.artistsNames}</p>
+            <p className="text-sm text-gray-400">{nowPlaying.albumName}</p>
+            {nowPlaying?.albumImage && (
+              <img
+                src={nowPlaying.albumImage}
+                alt={nowPlaying.trackName ?? ""}
+                className="w-16 h-16 rounded object-cover mt-4"
+              />
+            )}
+          </div>
+        ) : (
+          <p className="mt-2 text-sm text-gray-300">No track is playing</p>
+        )}
+      </div>
+      {/* add the rest of your visualizer layout here */}
     </div>
-
-    {/* add the rest of your visualizer layout here */}
-  </div>
-);
-
+  );
 }
