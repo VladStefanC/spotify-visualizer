@@ -289,7 +289,7 @@ export default function App() {
             <img
               src={nowPlaying.albumImage}
               alt={nowPlaying.trackName ?? ""}
-              className="relative z-10 ml-[10%] aspect-square rounded-none object-cover shadow-[0_0_20px_rgba(0,0,0,0.35)]"
+              className="relative x-100px y-100px z-10 ml-[10%] aspect-square rounded-none object-cover shadow-[0_0_20px_rgba(0,0,0,0.35)]"
             />
           </div>
         </>
