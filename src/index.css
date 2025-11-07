@@ -25,7 +25,7 @@
     transform: rotate(0deg) scale(0.95);
   }
   50% {
-    transform: rotate(15deg) scale(1.05);
+    transform: rotate(240deg) scale(1.05);
   }
   to {
     transform: rotate(360deg) scale(0.95);
@@ -37,7 +37,7 @@
     transform: rotate(0deg) scale(1);
   }
   50% {
-    transform: rotate(20deg) scale(1.1);
+    transform: rotate(240deg) scale(1.1);
   }
   to {
     transform: rotate(360deg) scale(1);
