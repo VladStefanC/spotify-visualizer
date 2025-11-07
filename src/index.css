@@ -28,30 +28,31 @@
     transform: rotate(240deg) scale(1.05);
   }
   to {
-    transform: rotate(360deg) scale(0.95);
+   /* transform: rotate(360deg) scale(0.95); */
+    transform:skew(340deg , 100deg) scale(1.1);
   }
 }
 
 @keyframes wave-fast {
   from {
-    transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(0.95);
   }
   50% {
-    transform: rotate(240deg) scale(1.1);
+    transform: rotate(240deg) scale(1.05);
   }
   to {
-    transform: rotate(360deg) scale(1);
+   transform: rotate(360deg) scale(0.95);
   }
 }
 
 .animate-wave-slow {
-  animation: wave-slow 28s linear infinite;
+  animation: wave-slow 28s radial infinite;
 }
 
 .animate-wave-medium {
-  animation: wave-medium 22s linear infinite;
+  animation: wave-medium 22s radial infinite;
 }
 
 .animate-wave-fast {
-  animation: wave-fast 18s linear infinite;
+  animation: wave-fast 18s radial infinite;
 }
