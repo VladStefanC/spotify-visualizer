@@ -286,12 +286,12 @@ export default function App() {
           </div>
 
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-              </div>
-              <img
-                src={nowPlaying.albumImage}
-                alt={nowPlaying.trackName ?? ""}
-                className="relative z-10 ml-[-20%] aspect-square size-[clamp(10rem,36vw,19rem)] rounded-none object-cover shadow-[0_0_20px_rgba(0,0,0,0.35)]"
-              />
+            <img
+              src={nowPlaying.albumImage}
+              alt={nowPlaying.trackName ?? ""}
+              className="relative z-10 ml-[-20%] aspect-square size-[clamp(10rem,36vw,19rem)] rounded-none object-cover shadow-[0_0_20px_rgba(0,0,0,0.35)]"
+            />
+          </div>
         </>
       )}
     </div>
