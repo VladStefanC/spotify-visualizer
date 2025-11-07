@@ -277,7 +277,7 @@ export default function App() {
       </div>
       {nowPlaying?.albumImage && (
         <>
-          <div className="absolute top-1/2 left-[55%] -translate-x-1/2 -translate-y-1/2">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="relative h-[22rem] w-[22rem]">
               <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,var(--wave-a),var(--wave-b),var(--wave-c),rgba(0,0,0,0.9))] animate-vinyl-spin" />
               <div className="absolute top-1/2 left-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white" />
@@ -285,7 +285,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="absolute top-1/2 left-[40%] -translate-x-1/2 -translate-y-1/2">
+          <div className="absolute top-1/2 left-1/2.5 -translate-x-1/2 -translate-y-1/2">
             <img
               src={nowPlaying.albumImage}
               alt={nowPlaying.trackName ?? ""}

@@ -5,7 +5,7 @@
   to { transform: rotate(360deg); }
 }
 .animate-vinyl-spin {
-  animation: vinyl-spin 22s linear infinite;
+  animation: vinyl-spin 22s radial infinite;
 }
 
 @keyframes wave-slow {
