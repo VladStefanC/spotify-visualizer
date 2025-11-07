@@ -1,11 +1,15 @@
 @import "tailwindcss";
 
 @keyframes vinyl-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 .animate-vinyl-spin {
-  animation: vinyl-spin 22s radial infinite;
+  animation: vinyl-spin 22s linear infinite;
 }
 
 @keyframes wave-slow {
@@ -28,8 +32,7 @@
     transform: rotate(240deg) scale(1.05);
   }
   to {
-   /* transform: rotate(360deg) scale(0.95); */
-    transform:skew(340deg , 100deg) scale(1.1);
+    transform: rotate(360deg) scale(0.95);
   }
 }
 
@@ -41,7 +44,7 @@
     transform: rotate(240deg) scale(1.05);
   }
   to {
-   transform: rotate(360deg) scale(0.95);
+    transform: rotate(360deg) scale(0.95);
   }
 }
 
