@@ -279,16 +279,16 @@ export default function App() {
         <>
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="relative flex items-center justify-center">
-              <div className="absolute aspect-square size-[clamp(10rem,30vw,18rem)] -translate-x-1/4">
+              <div className="absolute aspect-square size-[clamp(10rem,30vw,18rem)] -translate-x-[55%]">
                 <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,var(--wave-a),var(--wave-b),var(--wave-c),rgba(0,0,0,0.9))] animate-vinyl-spin" />
-                <div className="absolute top-1/2 left-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white" />
-                <div className="absolute top-1/2 left-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black" />
+                <div className="absolute top-1/2 left-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white" />
+                <div className="absolute top-1/2 left-1/2 h-15 w-15 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black" />
               </div>
 
               <img
                 src={nowPlaying.albumImage}
                 alt={nowPlaying.trackName ?? ""}
-                className="relative z-10 aspect-square size-[clamp(10rem,30vw,18rem)] rounded-none object-cover shadow-[0_0_20px_rgba(0,0,0,0.35)]"
+                className="relative z-10 aspect-square size-[clamp(16rem,35vw,22rem)] translate-x-[45%] rounded-none object-cover shadow-[0_0_20px_rgba(0,0,0,0.35)]"
               />
             </div>
           </div>
