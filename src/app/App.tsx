@@ -285,12 +285,18 @@ export default function App() {
             </div>
           </div>
 
-          <div className="absolute top-1/2 left-1/2.5 -translate-x-1/2 -translate-y-1/2">
-            <img
-              src={nowPlaying.albumImage}
-              alt={nowPlaying.trackName ?? ""}
-              className="h-100 w-100 rounded-none object-cover shadow-[0_0_20px_rgba(0,0,0,0.35)]"
-            />
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="relative flex w-[min(90vw,32rem)] max-w-3xl items-center justify-center">
+              <div className="relative aspect-square size-[clamp(12rem,40vw,22rem)] shrink-0">
+                {/* vinyl layers stay the same */}
+              </div>
+
+              <img
+                src={nowPlaying.albumImage}
+                alt={nowPlaying.trackName ?? ""}
+                className="relative z-10 ml-[-20%] aspect-square size-[clamp(10rem,36vw,19rem)] rounded-none object-cover shadow-[0_0_20px_rgba(0,0,0,0.35)]"
+              />
+            </div>
           </div>
         </>
       )}
