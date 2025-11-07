@@ -10,13 +10,13 @@
 
 @keyframes wave-slow {
   from {
-    transform: translateX(-50%) rotate(0deg) scale(1);
+    transform: translateX(-20%) rotate(240deg) scale(1.2);
   }
   50% {
-    transform: translateX(-48%) rotate(5deg) scale(1.05);
+    transform: translateX(-38%) rotate(120deg) scale(0.8);
   }
   to {
-    transform: translateX(-50%) rotate(360deg) scale(1);
+    transform: translateX(-20%) rotate(360deg) scale(1.2);
   }
 }
 
