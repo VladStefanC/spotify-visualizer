@@ -277,20 +277,20 @@ export default function App() {
       </div>
       {nowPlaying?.albumImage && (
         <>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <div className="relative h-[22rem] w-[22rem]">
-              <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,var(--wave-a),var(--wave-b),var(--wave-c),rgba(0,0,0,0.9))] animate-vinyl-spin" />
-              <div className="absolute top-1/2 left-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white" />
-              <div className="absolute top-1/2 left-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black" />
-            </div>
-          </div>
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="relative flex items-center justify-center">
+              <div className="absolute aspect-square size-[clamp(10rem,30vw,18rem)] -translate-x-1/4">
+                <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,var(--wave-a),var(--wave-b),var(--wave-c),rgba(0,0,0,0.9))] animate-vinyl-spin" />
+                <div className="absolute top-1/2 left-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white" />
+                <div className="absolute top-1/2 left-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black" />
+              </div>
 
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <img
-              src={nowPlaying.albumImage}
-              alt={nowPlaying.trackName ?? ""}
-              className="relative h-[100px] w-[100px] z-10 ml-[10%] aspect-square rounded-none object-cover shadow-[0_0_20px_rgba(0,0,0,0.35)]"
-            />
+              <img
+                src={nowPlaying.albumImage}
+                alt={nowPlaying.trackName ?? ""}
+                className="relative z-10 aspect-square size-[clamp(10rem,30vw,18rem)] rounded-none object-cover shadow-[0_0_20px_rgba(0,0,0,0.35)]"
+              />
+            </div>
           </div>
         </>
       )}
