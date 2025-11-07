@@ -280,7 +280,7 @@ export default function App() {
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="relative flex items-center justify-center">
               <div className="absolute aspect-square size-[clamp(16rem,35vw,22rem)] -translate-x-1/2">
-                <div className="absolute inset-5 rounded-full bg-[linear-gradient(circle,var(--wave-a),var(--wave-b),var(--wave-c),rgba(0,0,0,0.9))] animate-vinyl-spin" />
+                <div className="absolute inset-0 rounded-full bg-[linear-gradient(circle,var(--wave-a),var(--wave-b),var(--wave-c),rgba(0,0,0,0.9))] animate-vinyl-spin" />
                 <div className="absolute top-1/2 left-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white" />
                 <div className="absolute top-1/2 left-1/2 h-15 w-15 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black" />
               </div>
